@@ -25,8 +25,23 @@
       <div class="hero-topline">
         <p class="eyebrow">Portfolio / Resume</p>
 
-        <button class="theme-toggle" id="themeToggle" type="button">
-          <span class="toggle-icon">◐</span>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme">
+          <span class="theme-scene" aria-hidden="true">
+            <span class="theme-sky">
+              <span class="theme-sun">
+                <span class="sun-ray ray-one"></span>
+                <span class="sun-ray ray-two"></span>
+                <span class="sun-ray ray-three"></span>
+                <span class="moon-crater crater-one"></span>
+                <span class="moon-crater crater-two"></span>
+                <span class="moon-crater crater-three"></span>
+              </span>
+              <span class="theme-cloud cloud-one"></span>
+              <span class="theme-cloud cloud-two"></span>
+              <span class="theme-star star-one"></span>
+              <span class="theme-star star-two"></span>
+            </span>
+          </span>
           <span class="toggle-text">Dark Theme</span>
         </button>
       </div>
@@ -202,18 +217,25 @@
     const toggle = document.getElementById('themeToggle');
     const toggleText = toggle.querySelector('.toggle-text');
 
+    const updateThemeToggle = (theme) => {
+      const isDark = theme === 'dark';
+      toggleText.textContent = isDark ? 'Light Theme' : 'Dark Theme';
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+      toggle.setAttribute('aria-pressed', String(isDark));
+    };
+
     const savedTheme = localStorage.getItem('chloe-theme');
     if (savedTheme === 'dark') {
       root.setAttribute('data-theme', 'dark');
-      toggleText.textContent = 'Light Theme';
     }
+    updateThemeToggle(root.getAttribute('data-theme'));
 
     toggle.addEventListener('click', () => {
       const isDark = root.getAttribute('data-theme') === 'dark';
       const nextTheme = isDark ? 'light' : 'dark';
       root.setAttribute('data-theme', nextTheme);
       localStorage.setItem('chloe-theme', nextTheme);
-      toggleText.textContent = nextTheme === 'dark' ? 'Light Theme' : 'Dark Theme';
+      updateThemeToggle(nextTheme);
     });
   </script>
 </body>
