@@ -781,6 +781,14 @@ body[data-theme="dark"] .theme-toggle:hover .sun-ray {
   color: var(--muted);
 }
 
+.timeline-meta {
+  margin: 0 0 0 0;
+}
+
+.timeline-item ul {
+  margin-top: 0.45rem;
+}
+
 .note {
   font-size: 0.95rem;
   padding-top: 0.4rem;
